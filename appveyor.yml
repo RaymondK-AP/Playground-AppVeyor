@@ -1,0 +1,24 @@
+version: '1.0.{build}'
+image: Visual Studio 2017
+branches:
+  only:
+  - master
+init:
+  # Good practise, because Windows line endings are different from Unix/Linux ones
+install:
+  # Install repo specific stuff here
+before_build:
+  # Restore nuget packages
+  - nuget restore
+build_script:
+  - verbosity: minimal
+after_build:
+  # For once the build has completed
+artifacts:
+clone_depth: 1
+test_script:
+  # restore packages for our unit tests
+  # run the unit tests (requires changing into the test directory)
+on_finish :
+  # any cleanup in here
+deploy: off
